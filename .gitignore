@@ -1,0 +1,17 @@
+data
+data/*
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+.DS_Store
+
+build/
+dist/
+*.o
+*.so
+
+

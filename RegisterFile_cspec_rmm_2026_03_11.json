@@ -1,0 +1,3058 @@
+{
+  "Device": "R5560",
+  "Registers": [
+    {
+      "Name": "T0SW",
+      "Address": 17,
+      "RegionSize": 1,
+      "Description": "",
+      "Category": "Undefined"
+    },
+    {
+      "Name": "VETOSW",
+      "Address": 18,
+      "RegionSize": 1,
+      "Description": "",
+      "Category": "Undefined"
+    },
+    {
+      "Name": "EXTTRG_EN",
+      "Address": 19,
+      "RegionSize": 1,
+      "Description": "",
+      "Category": "Undefined"
+    },
+    {
+      "Name": "RUN_EN",
+      "Address": 20,
+      "RegionSize": 1,
+      "Description": "",
+      "Category": "Undefined"
+    },
+    {
+      "Name": "RESET_CORE",
+      "Address": 21,
+      "RegionSize": 1,
+      "Description": "",
+      "Category": "Undefined"
+    },
+    {
+      "Name": "ESS_MODE",
+      "Address": 2359321,
+      "RegionSize": 1,
+      "Description": "",
+      "Category": "Undefined"
+    }
+  ],
+  "Version": "0.0",
+  "GenerationData": "0001-01-01T00:00:00",
+  "MMCComponents": [
+    {
+      "Name": "PCFG",
+      "Type": "RegisterFile",
+      "Address": 0,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "RAWOFS",
+          "Address": 1,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "POL",
+          "Address": 2,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "TRG_SOURCE",
+          "Address": 3,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "TRG_MODE",
+          "Address": 4,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "THRS",
+          "Address": 5,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "HIST",
+          "Address": 6,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "TRG_HOLD",
+          "Address": 7,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "TRG_W",
+          "Address": 8,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "GATE_W",
+          "Address": 9,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "FLT_CFG",
+          "Address": 10,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "C11",
+          "Address": 11,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "C12",
+          "Address": 12,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "C21",
+          "Address": 13,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "C22",
+          "Address": 14,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "CPZ",
+          "Address": 15,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        },
+        {
+          "Name": "PRB_SEL",
+          "Address": 16,
+          "RegionSize": 0,
+          "Description": null,
+          "Category": null
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "RateMeter_0",
+      "Type": "MCRateMeter",
+      "Address": 65536,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [],
+      "Channels": 16,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "TRG_MASK",
+      "Type": "MultiChannelRegister",
+      "Address": 131073,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "CH0",
+          "Address": 131074,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH1",
+          "Address": 131075,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH2",
+          "Address": 131076,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH3",
+          "Address": 131077,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH4",
+          "Address": 131078,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH5",
+          "Address": 131079,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH6",
+          "Address": 131080,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH7",
+          "Address": 131081,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH8",
+          "Address": 131082,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH9",
+          "Address": 131083,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH10",
+          "Address": 131084,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH11",
+          "Address": 131085,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH12",
+          "Address": 131086,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH13",
+          "Address": 131087,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH14",
+          "Address": 131088,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH15",
+          "Address": 131089,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "FINE_OFS",
+      "Type": "MultiChannelRegister",
+      "Address": 131091,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "CH0",
+          "Address": 131092,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH1",
+          "Address": 131093,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH2",
+          "Address": 131094,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH3",
+          "Address": 131095,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH4",
+          "Address": 131096,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH5",
+          "Address": 131097,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH6",
+          "Address": 131098,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH7",
+          "Address": 131099,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH8",
+          "Address": 131100,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH9",
+          "Address": 131101,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH10",
+          "Address": 131102,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH11",
+          "Address": 131103,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH12",
+          "Address": 131104,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH13",
+          "Address": 131105,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH14",
+          "Address": 131106,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CH15",
+          "Address": 131107,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_0",
+      "Type": "Oscilloscope",
+      "Address": 135168,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 139264,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 139265,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 139266,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 139267,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 139268,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 139269,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 139270,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_1",
+      "Type": "Oscilloscope",
+      "Address": 143360,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 147456,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 147457,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 147458,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 147459,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 147460,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 147461,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 147462,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_2",
+      "Type": "Oscilloscope",
+      "Address": 151552,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 155648,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 155649,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 155650,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 155651,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 155652,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 155653,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 155654,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_4",
+      "Type": "Oscilloscope",
+      "Address": 159744,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 163840,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 163841,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 163842,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 163843,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 163844,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 163845,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 163846,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_3",
+      "Type": "Oscilloscope",
+      "Address": 167936,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 172032,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 172033,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 172034,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 172035,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 172036,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 172037,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 172038,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_5",
+      "Type": "Oscilloscope",
+      "Address": 176128,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 180224,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 180225,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 180226,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 180227,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 180228,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 180229,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 180230,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_8",
+      "Type": "Oscilloscope",
+      "Address": 184320,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 188416,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 188417,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 188418,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 188419,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 188420,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 188421,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 188422,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_9",
+      "Type": "Oscilloscope",
+      "Address": 192512,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 196608,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 196609,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 196610,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 196611,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 196612,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 196613,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 196614,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_10",
+      "Type": "Oscilloscope",
+      "Address": 200704,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 204800,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 204801,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 204802,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 204803,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 204804,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 204805,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 204806,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_11",
+      "Type": "Oscilloscope",
+      "Address": 208896,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 212992,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 212993,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 212994,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 212995,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 212996,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 212997,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 212998,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_12",
+      "Type": "Oscilloscope",
+      "Address": 217088,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 221184,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 221185,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 221186,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 221187,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 221188,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 221189,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 221190,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_13",
+      "Type": "Oscilloscope",
+      "Address": 225280,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 229376,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 229377,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 229378,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 229379,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 229380,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 229381,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 229382,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_6",
+      "Type": "Oscilloscope",
+      "Address": 233472,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 237568,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 237569,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 237570,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 237571,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 237572,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 237573,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 237574,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_7",
+      "Type": "Oscilloscope",
+      "Address": 241664,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 245760,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 245761,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 245762,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 245763,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 245764,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 245765,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 245766,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_14",
+      "Type": "Oscilloscope",
+      "Address": 249856,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 253952,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 253953,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 253954,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 253955,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 253956,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 253957,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 253958,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Oscilloscope_15",
+      "Type": "Oscilloscope",
+      "Address": 258048,
+      "Version": "1.0.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 262144,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_POSITION",
+          "Address": 262145,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_MODE",
+          "Address": 262146,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_PRETRIGGER",
+          "Address": 262147,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_TRIGGER_LEVEL",
+          "Address": 262148,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_ARM",
+          "Address": 262149,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_DECIMATOR",
+          "Address": 262150,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 4,
+      "ChannelsList": null,
+      "nsamples": 1024,
+      "WordSize": 16,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 16,
+      "AnalogInputs": 1,
+      "DigitalInputs": 4,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 1,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_0",
+      "Type": "Spectrum",
+      "Address": 327680,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 393216,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 393217,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 393218,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 393219,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 393220,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 393221,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_1",
+      "Type": "Spectrum",
+      "Address": 458752,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 524288,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 524289,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 524290,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 524291,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 524292,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 524293,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_2",
+      "Type": "Spectrum",
+      "Address": 589824,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 655360,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 655361,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 655362,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 655363,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 655364,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 655365,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_3",
+      "Type": "Spectrum",
+      "Address": 720896,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 786432,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 786433,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 786434,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 786435,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 786436,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 786437,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_4",
+      "Type": "Spectrum",
+      "Address": 851968,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 917504,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 917505,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 917506,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 917507,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 917508,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 917509,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_5",
+      "Type": "Spectrum",
+      "Address": 983040,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1048576,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1048577,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1048578,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1048579,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1048580,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1048581,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_6",
+      "Type": "Spectrum",
+      "Address": 1114112,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1179648,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1179649,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1179650,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1179651,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1179652,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1179653,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_7",
+      "Type": "Spectrum",
+      "Address": 1245184,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1310720,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1310721,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1310722,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1310723,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1310724,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1310725,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_8",
+      "Type": "Spectrum",
+      "Address": 1376256,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1441792,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1441793,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1441794,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1441795,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1441796,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1441797,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_9",
+      "Type": "Spectrum",
+      "Address": 1507328,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1572864,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1572865,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1572866,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1572867,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1572868,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1572869,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_10",
+      "Type": "Spectrum",
+      "Address": 1638400,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1703936,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1703937,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1703938,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1703939,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1703940,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1703941,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_11",
+      "Type": "Spectrum",
+      "Address": 1769472,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1835008,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1835009,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1835010,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1835011,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1835012,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1835013,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_12",
+      "Type": "Spectrum",
+      "Address": 1900544,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 1966080,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 1966081,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 1966082,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 1966083,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 1966084,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 1966085,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_13",
+      "Type": "Spectrum",
+      "Address": 2031616,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 2097152,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 2097153,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 2097154,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 2097155,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 2097156,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 2097157,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_14",
+      "Type": "Spectrum",
+      "Address": 2162688,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 2228224,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 2228225,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 2228226,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 2228227,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 2228228,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 2228229,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "Spectrum_15",
+      "Type": "Spectrum",
+      "Address": 2293760,
+      "Version": "1.0.1.0",
+      "bins": 1024,
+      "CountsBit": 16,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "STATUS",
+          "Address": 2359296,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 2359297,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_LIMIT",
+          "Address": 2359298,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_REBIN",
+          "Address": 2359299,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MIN",
+          "Address": 2359300,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG_MAX",
+          "Address": 2359301,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "CP_ESS",
+      "Type": "CustomPacket",
+      "Address": 2359320,
+      "Version": "1.1.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "CONFIG",
+          "Address": 2359321,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "listOfbars": [
+        {
+          "Type": "Constant",
+          "SliceStart": 31,
+          "SliceEnd": 0,
+          "size": 0,
+          "Value": "FFFFFFFF",
+          "ValueFormat": "Hex",
+          "Text": "HFFFFFFFF",
+          "RowText": "Word_ 0",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Green",
+          "HoverColor": "Green",
+          "Index": 0
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 31,
+          "SliceEnd": 0,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 1",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 1
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 63,
+          "SliceEnd": 32,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 2",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 2
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 95,
+          "SliceEnd": 64,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 3",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 3
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 127,
+          "SliceEnd": 96,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 4",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 4
+        }
+      ],
+      "listOfSignals": [
+        {
+          "Name": "IN_1",
+          "Size": 128
+        }
+      ],
+      "listOfWord": [
+        {
+          "PioWE": [
+            {
+              "Type": "Constant",
+              "Signal": "FFFFFFFF",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 31,
+              "SliceStop": 0,
+              "Value": "FFFFFFFF",
+              "ValueFormat": "Hex"
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 31,
+              "SliceStop": 0,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 63,
+              "SliceStop": 32,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 95,
+              "SliceStop": 64,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 127,
+              "SliceStop": 96,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        }
+      ],
+      "WordCount": 5,
+      "BufferLength": 0,
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    },
+    {
+      "Name": "CP_ETHERNET",
+      "Type": "CustomPacket",
+      "Address": 2359303,
+      "Version": "1.1.0.0",
+      "bins": 0,
+      "CountsBit": 0,
+      "UseDMA": false,
+      "Registers": [
+        {
+          "Name": "READ_STATUS",
+          "Address": 2359304,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "READ_VALID_WORDS",
+          "Address": 2359305,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        },
+        {
+          "Name": "CONFIG",
+          "Address": 2359306,
+          "RegionSize": 1,
+          "Description": "",
+          "Category": "Undefined"
+        }
+      ],
+      "listOfbars": [
+        {
+          "Type": "Constant",
+          "SliceStart": 31,
+          "SliceEnd": 0,
+          "size": 0,
+          "Value": "FFFFFFFF",
+          "ValueFormat": "Hex",
+          "Text": "HFFFFFFFF",
+          "RowText": "Word_ 0",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Green",
+          "HoverColor": "Green",
+          "Index": 0
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 31,
+          "SliceEnd": 0,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 1",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 1
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 63,
+          "SliceEnd": 32,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 2",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 2
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 95,
+          "SliceEnd": 64,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 3",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 3
+        },
+        {
+          "Type": "Input",
+          "SliceStart": 127,
+          "SliceEnd": 96,
+          "size": 0,
+          "Value": "IN_1",
+          "ValueFormat": "",
+          "Text": "IN_1",
+          "RowText": "Word_ 4",
+          "FromTime": 1,
+          "ToTime": 32,
+          "Color": "Azure",
+          "HoverColor": "Azure",
+          "Index": 4
+        }
+      ],
+      "listOfSignals": [
+        {
+          "Name": "IN_1",
+          "Size": 128
+        }
+      ],
+      "listOfWord": [
+        {
+          "PioWE": [
+            {
+              "Type": "Constant",
+              "Signal": "FFFFFFFF",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 31,
+              "SliceStop": 0,
+              "Value": "FFFFFFFF",
+              "ValueFormat": "Hex"
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 31,
+              "SliceStop": 0,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 63,
+              "SliceStop": 32,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 95,
+              "SliceStop": 64,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        },
+        {
+          "PioWE": [
+            {
+              "Type": "Input",
+              "Signal": "IN_1",
+              "BitStart": 0,
+              "BitStop": 31,
+              "SliceStart": 127,
+              "SliceStop": 96,
+              "Value": "IN_1",
+              "ValueFormat": ""
+            }
+          ]
+        }
+      ],
+      "WordCount": 5,
+      "BufferLength": 0,
+      "Channels": 0,
+      "ChannelsList": null,
+      "nsamples": 0,
+      "WordSize": 0,
+      "BinsX": 0,
+      "BinsY": 0,
+      "WordEnob": 0,
+      "AnalogInputs": 0,
+      "DigitalInputs": 0,
+      "SamplingFrequency": 0,
+      "TimeMultiplexing": 0,
+      "DecimatorMax": 0
+    }
+  ]
+}
