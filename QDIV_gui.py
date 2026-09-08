@@ -141,47 +141,27 @@ def reset_acquisition_variables():
 
 def read_data():
     global IM,PHS,PHS_A,PHS_B,COUNTS,LIST_DATA,PH_VS_POSITION
-    [channel_list,energy_A_list,energy_B_list,buffer_read_time]=digitizer.read_data()
+    [timestamp_list,channel_list,energy_A_list,energy_B_list,buffer_read_time]=digitizer.read_data()
 
+    timestamp_array = np.array(timestamp_list, dtype=np.float64)
+    channel_array = np.array(channel_list, dtype=np.int32)
+    energy_A_array = np.array(energy_A_list, dtype=np.float64)
+    energy_B_array = np.array(energy_B_list, dtype=np.float64)
 
-    # check if energy_A_list and energy_B_list are not empty to avoid division by zero
-    #if len(energy_A_list) == 0 or len(energy_B_list) == 0:
-    #    print("No data read from digitizer.")
-    # check if channel_list is not empty to avoid errors in histogramming
-    #if len(channel_list) == 0:
-    #    print("No channel data read from digitizer.")
-    #else:
-    #print(f"Read {len(channel_list)} events: {len(energy_A_list)} energy A values, {len(energy_B_list)} energy B values.")
+    total_energy_array = energy_A_array + energy_B_array
 
-    # check whether energy_A + energy_B is zero to avoid division by zero in position calculation
-    if any((np.array(energy_A_list) + np.array(energy_B_list)) == 0):
+    valid_array = (
+        (channel_array >= 0)
+        & (channel_array < config.det.nb_of_tubes)
+        & (total_energy_array > 0)
+    )
 
-        # count number of events with zero total energy
-        zero_energy_events = np.sum((np.array(energy_A_list) + np.array(energy_B_list)) == 0)
-        #print(f"Warning: {zero_energy_events} events have zero total energy, which may lead to division by zero in position calculation.")
-        #print("Warning: Some events have zero total energy, which may lead to division by zero in position calculation.")
-        # Optionally, you can filter out these events or handle them appropriately
-        valid_indices = (np.array(energy_A_list) + np.array(energy_B_list)) != 0
-        channel_list = np.array(channel_list)[valid_indices]
-        energy_A_list = np.array(energy_A_list)[valid_indices]
-        energy_B_list = np.array(energy_B_list)[valid_indices]
+    timestamp_array = timestamp_array[valid_array]
+    channel_array = channel_array[valid_array]
+    energy_A_array = energy_A_array[valid_array]
+    energy_B_array = energy_B_array[valid_array]
+    total_energy_array = total_energy_array[valid_array]
 
-
-    channel_array=np.array(channel_list,dtype=np.int32)
-    energy_A_array=np.array(energy_A_list,dtype=np.float64)
-    energy_B_array=np.array(energy_B_list,dtype=np.float64)
-    total_energy_array=energy_A_array+energy_B_array
-    # Reject invalid events : channel number outside of the detector (garbage words still
-    # sitting in the digitizer buffers) or null total energy (division by zero in the
-    # charge-division position calculation)
-    valid_array=(channel_array>=0)&(channel_array<config.det.nb_of_tubes)&(total_energy_array>0)
-    nb_of_rejected_events=int(np.size(valid_array)-np.count_nonzero(valid_array))
-    if nb_of_rejected_events and config.chatty:
-        print('######## Rejected events : '+str(nb_of_rejected_events))
-    channel_array=channel_array[valid_array]
-    energy_A_array=energy_A_array[valid_array]
-    energy_B_array=energy_B_array[valid_array]
-    total_energy_array=total_energy_array[valid_array]
     # Charge division : position is in [0,nb_of_pixels_per_tube-1] (B=0 would give an extra bin)
     position_array=np.minimum(np.int32(config.nb_of_pixels_per_tube*energy_A_array/total_energy_array),config.nb_of_pixels_per_tube-1)
     yrange=(np.arange(0,2*2**16+1,int(2*2**16/config.nb_of_bins_in_spectrum)))-0.5
@@ -208,8 +188,8 @@ def read_data():
         PHS_B=PHS_B+HISTO_ENERGY_B[0]
         PH_VS_POSITION=PH_VS_POSITION+PH_vs_position
         if LIST_SAVING_ENABLED:
-            # Create a 2D array with 3 columns
-            combined_array = np.column_stack((channel_array,energy_A_array ,energy_B_array))
+            # Create a 2D array with 4 columns
+            combined_array = np.column_stack((timestamp_array,channel_array,energy_A_array ,energy_B_array))
             # Convert to list and append multiple times
             LIST_DATA.extend(combined_array.tolist())
     return buffer_read_time,int(np.size(valid_array))
@@ -283,12 +263,13 @@ def update_acquisition_figures():
             PHS_fig=np.log(PHS_snapshot)
             PH_vs_position_fig=np.log(PH_VS_POSITION_snapshot)
 
-    counts_per_second=str(int(COUNTS_snapshot/ELAPSED_TIME))+ ' counts/s'
+    counts_per_second = f"{float(COUNTS_snapshot/ELAPSED_TIME):.2f} counts/s"
+    total_counts = f"{int(COUNTS_snapshot)} counts"
 
     match acq_fig_selec_toggle.value:
         case 'Image':
             ACQ_FIG1.figure=px.imshow(IM_fig,aspect=config.det.aspect_ratio,labels=dict(x="X channel", y="Y channel", color="Counts"))
-            ACQ_FIG1.figure.update_layout(title={'text':counts_per_second,'x': 0.5})
+            ACQ_FIG1.figure.update_layout(title={'text':counts_per_second + ' ; '   + total_counts,'x': 0.5})
             ACQ_FIG1.figure.update_xaxes(title='Tube length (a.u.)')
             ACQ_FIG1.figure.update_yaxes(title='Tube number')
             ACQ_FIG1.set_visibility(True)
@@ -300,7 +281,7 @@ def update_acquisition_figures():
                     ACQ_PROJ.set_visibility(False)
                     ACQ_FIG1.set_visibility(True)
                     ACQ_FIG1.figure=px.imshow(PHS_fig,aspect=config.det.aspect_ratio,labels=dict(x="X channel", y="Y channel", color="Counts"))
-                    ACQ_FIG1.figure.update_layout(title={'text':counts_per_second,'x': 0.5})
+                    ACQ_FIG1.figure.update_layout(title={'text':counts_per_second + ' ; ' + total_counts,'x': 0.5})
                     ACQ_FIG1.figure.update_xaxes(title='Bins')
                     ACQ_FIG1.figure.update_yaxes(title='Tube number')
                     #ACQ_FIG1.classes('w-full justify-center no-wrap')
@@ -332,10 +313,10 @@ def update_acquisition_figures():
             ACQ_FIG1.update()
         case 'Pulse height vs position':
             ACQ_FIG1.figure=px.imshow(PH_vs_position_fig,aspect=config.det.aspect_ratio,labels=dict(x="X channel", y="Y channel", color="Counts"))
-            ACQ_FIG1.figure.update_layout(title={'text':counts_per_second,'x': 0.5})
+            ACQ_FIG1.figure.update_layout(title={'text':counts_per_second + ' ; ' + total_counts,'x': 0.5})
             ACQ_FIG1.figure.update_xaxes(title='Tube length [a.u.]')
             ACQ_FIG1.figure.update_yaxes(title='Counts')
-            ACQ_FIG1.update()
+            ACQ_FIG1.update()           
 
 def save_acquisition_files():
             fullPath=path.value+'/'+subpath.value
@@ -344,7 +325,8 @@ def save_acquisition_files():
                 fileIndex = fileIndex+1
             else:
                 fileIndex = 1
-                np.savetxt(fullPath+'/'+'idx.txt',np.array([fileIndex], np.int32), fmt="%05d")
+
+            np.savetxt(fullPath+'/'+'idx.txt',np.array([fileIndex], np.int32), fmt="%05d")
 
             dataFile=fullPath+'/'+'image'+'_'+str("%05d" % fileIndex)+'.txt'
             np.savetxt(dataFile, IM , fmt='%i')
@@ -368,7 +350,7 @@ def save_acquisition_files():
 
             if list_saving_checkbox.value:
                 dataFile=fullPath+'/'+'list_data'+'_'+str("%05d" % fileIndex)+'.txt'
-                np.savetxt(dataFile, np.array(LIST_DATA) , fmt='%i')
+                np.savetxt(dataFile, np.array(LIST_DATA), fmt=['%.9f', '%i', '%i', '%i'])
 
             ui.notification("Plots saved in .txt and .pdf formats",timeout=1)
 
@@ -476,8 +458,8 @@ def save_traces(combined_array):
             fileIndex = fileIndex+1
         else:
             fileIndex = 1
-        np.savetxt(fullPath+'idx.txt',np.array([fileIndex], np.int32), fmt="%05d")
-        dataFile=fullPath+traces_filename.value+'tube#'+str(round(tube_number.value-1))+'_'+str("%05d" % fileIndex)+'.txt'
+        np.savetxt(fullPath+'/traces/'+'idx.txt',np.array([fileIndex], np.int32), fmt="%05d")
+        dataFile=fullPath+'/traces/'+'trace_'+'tube_'+str(round(tube_number.value-1))+'_'+str("%05d" % fileIndex)+'.txt'
         np.savetxt(dataFile, combined_array  , fmt='%i')
         if config.chatty:
             print('### Traces saved in : ' + dataFile)

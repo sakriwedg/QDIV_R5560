@@ -219,44 +219,160 @@ class digitizer:
         return time.time()
 
     def read_data(self):
+
+        # The data words coming from the custom packet are byte-swapped
+        # with respect to the way we want to interpret the 32-bit values.
+        #
+        # Example:
+        #     0x24000000  ->  0x00000024
+        #
+        # This is equivalent to reversing the four bytes of a 32-bit word.
         def swap32(x):
             return ((x & 0xFF) << 24) | \
                 ((x & 0xFF00) << 8) | \
                 ((x & 0xFF0000) >> 8) | \
                 ((x >> 24) & 0xFF)
-        #timestamp_list=[]
-        channel_list=[]
-        energy_A_list=[]
-        energy_B_list=[]
-        read_time_list=[]
-        for i,sdk in enumerate(self.sdk_list):
-            res_cus, buf = sdk.ReadData(f"board0list:/MMCComponents/{self.custom_packet}",self.custom_packet_buffer_list[i])
+
+        # Lists containing the decoded information for all events
+        # read from all connected boards / RJ45 ports.
+        timestamp_list = []
+        channel_list = []
+        energy_A_list = []
+        energy_B_list = []
+
+        # Keep track of when each ReadData() call was performed.
+        read_time_list = []
+
+        # Read data from each connected SDK / board.
+        for i, sdk in enumerate(self.sdk_list):
+
+            res_cus, buf = sdk.ReadData(
+                f"board0list:/MMCComponents/{self.custom_packet}",
+                self.custom_packet_buffer_list[i]
+            )
+
+            # Time at which this buffer was read.
             read_time_list.append(time.time())
+
+            # Number of valid events contained in the buffer.
             valid = int(buf.info.valid_data)
+
             if config.chatty:
-                # never print unconditionally here : this runs in the read-out thread, several
-                # hundred times per second, and console output would throttle the read-out
-                print('######## Buffer size : '+ str(valid))
+                # This function runs frequently in the read-out thread,
+                # so only print this when explicitly requested.
+                print('######## Buffer size : ' + str(valid))
+
+            # Decode each event contained in the buffer.
+            #
+            # Each event consists of 5 x 32-bit words = 20 bytes:
+            #
+            #   word 0 : TOF high 32 bits
+            #   word 1 : TOF low  32 bits
+            #   word 2 : channel / metadata
+            #   word 3 : energy A + energy B
+            #   word 4 : other data (currently not used)
+            #
+            # The timestamp is a 64-bit free-running counter running
+            # at 125 MHz. It is split into two 32-bit words.
             for evt in range(valid):
-                #w0 = swap32(buf.data[evt].row[0])
-                #w1 = swap32(buf.data[evt].row[1])
+
+                # ---------------------------------------------------------
+                # WORD 0 + WORD 1 : 64-bit timestamp
+                # ---------------------------------------------------------
+
+                # Get the two raw 32-bit words from the packet.
+                # The mask guarantees that we are dealing with unsigned
+                # 32-bit values.
+                w0_raw = buf.data[evt].row[0] & 0xFFFFFFFF
+                w1_raw = buf.data[evt].row[1] & 0xFFFFFFFF
+
+                # Correct the byte order.
+                #
+                # w0 contains the upper 32 bits of the timestamp.
+                # w1 contains the lower 32 bits.
+                tof1 = swap32(w0_raw)
+                tof2 = swap32(w1_raw)
+
+                # Reconstruct the complete 64-bit timestamp:
+                #
+                #       [  tof1  ][  tof2  ]
+                #       upper 32   lower 32
+                #
+                # The shift moves tof1 into the upper half before
+                # combining it with tof2.
+                timestamp = (tof1 << 32) | tof2
+
+                # The timestamp counter runs at 125 MHz, i.e. there are
+                # 125,000,000 timestamp counts per second.
+                timestamp_seconds = timestamp / 125e6
+
+
+                # ---------------------------------------------------------
+                # WORD 2 : channel number
+                # ---------------------------------------------------------
+
+                # Correct the byte order of word 2.
                 w2 = swap32(buf.data[evt].row[2])
+
+                # The channel number is stored in bits 8-15 of w2.
+                #
+                #   w2 >> 8     -> move bits 8-15 to bits 0-7
+                #   & 0xFF      -> keep only those 8 bits
+                channel = (w2 >> 8) & 0xFF
+
+
+                # ---------------------------------------------------------
+                # WORD 3 : energy A and energy B
+                # ---------------------------------------------------------
+
+                # Correct the byte order of word 3.
                 w3 = swap32(buf.data[evt].row[3])
-                #timestamp = (w1 << 32) | w0
-                channel   = (w2 >> 8) & 0xFF
-                energy_A  = w3 & 0xFFFF
-                energy_B  = (w3 >> 16) & 0xFFFF
-                # shift channel number to the right tube number (for multiple RJ45 ports)
-                channel = channel + 16*i
-                #print(f"Event {evt}: Channel {channel}, Energy A {energy_A}, Energy B {energy_B}")
-                #timestamp_list.append(timestamp)
+
+                # After byte swapping, word 3 contains two 16-bit values:
+                #
+                #       [ energy_B ][ energy_A ]
+                #          16 bits     16 bits
+                #
+                # The lower 16 bits contain energy A.
+                energy_A = w3 & 0xFFFF
+
+                # Shift the upper 16 bits down and keep them.
+                energy_B = (w3 >> 16) & 0xFFFF
+
+
+                # ---------------------------------------------------------
+                # GLOBAL CHANNEL NUMBER
+                # ---------------------------------------------------------
+
+                # Each SDK / RJ45 port handles a group of 16 channels.
+                #
+                # i = 0  -> channels  0 ... 15
+                # i = 1  -> channels 16 ... 31
+                #
+                # Therefore add 16*i to obtain the global channel number.
+                channel = channel + 16 * i
+
+
+                # ---------------------------------------------------------
+                # Store the decoded event
+                # ---------------------------------------------------------
+
                 channel_list.append(channel)
                 energy_A_list.append(energy_A)
                 energy_B_list.append(energy_B)
-                
-        
-        return(channel_list,energy_A_list,energy_B_list,np.mean(read_time_list))
+                timestamp_list.append(timestamp_seconds)
 
+        # Return all decoded events.
+        #
+        # np.mean(read_time_list) gives the average wall-clock time at
+        # which the buffers were read.
+        return (
+            timestamp_list,
+            channel_list,
+            energy_A_list,
+            energy_B_list,
+            np.mean(read_time_list)
+        )
 
     def disconnect(self):
 
