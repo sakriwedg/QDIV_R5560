@@ -452,17 +452,36 @@ def push_traces_line_plots(time_axis,analog_traces,digital_traces):
     OFFSET_TABLE.append([mean_val_ch1.value,mean_val_ch2.value,mean_val_ch3.value,mean_val_ch4.value])
 
 def save_traces(combined_array):
-        fullPath=traces_path.value+'/'+traces_subpath.value 
-        if os.path.isfile(fullPath+'idx.txt'):
-            fileIndex = np.loadtxt(fullPath+'idx.txt', dtype='int16')
-            fileIndex = fileIndex+1
-        else:
-            fileIndex = 1
-        np.savetxt(fullPath+'/traces/'+'idx.txt',np.array([fileIndex], np.int32), fmt="%05d")
-        dataFile=fullPath+'/traces/'+'trace_'+'tube_'+str(round(tube_number.value-1))+'_'+str("%05d" % fileIndex)+'.txt'
-        np.savetxt(dataFile, combined_array  , fmt='%i')
-        if config.chatty:
-            print('### Traces saved in : ' + dataFile)
+    fullPath = os.path.join(traces_path.value, traces_subpath.value)
+    traces_dir = os.path.join(fullPath, 'traces')
+
+    # Create directory if it doesn't exist
+    os.makedirs(traces_dir, exist_ok=True)
+
+    idx_file = os.path.join(traces_dir, 'idx.txt')
+
+    if os.path.isfile(idx_file):
+        fileIndex = int(np.loadtxt(idx_file, dtype=np.int32))
+        fileIndex += 1
+    else:
+        fileIndex = 1
+
+    np.savetxt(
+        idx_file,
+        np.array([fileIndex], dtype=np.int32),
+        fmt="%05d"
+    )
+
+    dataFile = os.path.join(
+        traces_dir,
+        f"trace_tube_{round(tube_number.value - 1)}_{fileIndex:05d}.txt"
+    )
+
+    np.savetxt(dataFile, combined_array, fmt='%i')
+
+    if config.chatty:
+        print('### Traces saved in: ' + dataFile)
+
 
 def update_scope_traces():
     global TRACES_TO_SAVE_COUNTER,TRACES_COUNTER,RMS_TABLE, OFFSET_TABLE
