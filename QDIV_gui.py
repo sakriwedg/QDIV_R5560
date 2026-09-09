@@ -637,7 +637,7 @@ async def start_noise_measurement():
             pass
     traces_subpath.value=traces_subpath_copy
     traces_autosave_checkbox.value=False
-    fullPath=noise_path.value+'/'+noise_subpath.value 
+    fullPath=noise_path.value+'/'+noise_subpath.value+'/'
     dataFile=fullPath+'rms_noise.txt'
     print("dataFile:", dataFile)
     np.savetxt(dataFile, tube_RMS_mean , fmt='%.2f')
