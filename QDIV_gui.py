@@ -373,7 +373,7 @@ async def start_acquisition():
     notif = ui.notification(timeout=None,spinner=True,position="bottom-left")
     nIm=0
     if startToggleButton._state:
-        while nIm < (np.int16(repetitions.value)) and startToggleButton._state==1 and DATA_READER_ERROR is None:
+        while nIm < (np.int32(repetitions.value)) and startToggleButton._state==1 and DATA_READER_ERROR is None:
             frameNb = 1
             reset_acquisition_variables()
             LIST_SAVING_ENABLED=list_saving_checkbox.value
@@ -388,7 +388,7 @@ async def start_acquisition():
                     ELAPSED_TIME=max(LAST_BUFFER_READ_TIME-start_time,1E-3)
                     update_acquisition_figures()
                     if not live_mode_switch.value:
-                        notif.message = 'Acquisition : '+ str(nIm+1)+ '/'+str(np.int16(repetitions.value)) + ' ; Exposure time : ' + str(np.int16(time.time()-start_time ))+'s/'+str(np.int16(expT.value))+'s'
+                        notif.message = 'Acquisition : '+ str(nIm+1)+ '/'+str(np.int32(repetitions.value)) + ' ; Exposure time : ' + str(np.int16(time.time()-start_time ))+'s/'+str(np.int16(expT.value))+'s'
                     frameNb = frameNb+1
                     if DATA_READER_ERROR is not None:
                         ui.notify('Data read-out stopped : '+repr(DATA_READER_ERROR),type='negative')
@@ -452,17 +452,36 @@ def push_traces_line_plots(time_axis,analog_traces,digital_traces):
     OFFSET_TABLE.append([mean_val_ch1.value,mean_val_ch2.value,mean_val_ch3.value,mean_val_ch4.value])
 
 def save_traces(combined_array):
-        fullPath=traces_path.value+'/'+traces_subpath.value 
-        if os.path.isfile(fullPath+'idx.txt'):
-            fileIndex = np.loadtxt(fullPath+'idx.txt', dtype='int16')
-            fileIndex = fileIndex+1
-        else:
-            fileIndex = 1
-        np.savetxt(fullPath+'/traces/'+'idx.txt',np.array([fileIndex], np.int32), fmt="%05d")
-        dataFile=fullPath+'/traces/'+'trace_'+'tube_'+str(round(tube_number.value-1))+'_'+str("%05d" % fileIndex)+'.txt'
-        np.savetxt(dataFile, combined_array  , fmt='%i')
-        if config.chatty:
-            print('### Traces saved in : ' + dataFile)
+    fullPath = os.path.join(traces_path.value, traces_subpath.value)
+    traces_dir = os.path.join(fullPath, 'traces')
+
+    # Create directory if it doesn't exist
+    os.makedirs(traces_dir, exist_ok=True)
+
+    idx_file = os.path.join(traces_dir, 'idx.txt')
+
+    if os.path.isfile(idx_file):
+        fileIndex = int(np.loadtxt(idx_file, dtype=np.int32))
+        fileIndex += 1
+    else:
+        fileIndex = 1
+
+    np.savetxt(
+        idx_file,
+        np.array([fileIndex], dtype=np.int32),
+        fmt="%05d"
+    )
+
+    dataFile = os.path.join(
+        traces_dir,
+        f"trace_tube_{round(tube_number.value - 1)}_{fileIndex:05d}.txt"
+    )
+
+    np.savetxt(dataFile, combined_array, fmt='%i')
+
+    if config.chatty:
+        print('### Traces saved in: ' + dataFile)
+
 
 def update_scope_traces():
     global TRACES_TO_SAVE_COUNTER,TRACES_COUNTER,RMS_TABLE, OFFSET_TABLE
@@ -618,7 +637,7 @@ async def start_noise_measurement():
             pass
     traces_subpath.value=traces_subpath_copy
     traces_autosave_checkbox.value=False
-    fullPath=noise_path.value+'/'+noise_subpath.value 
+    fullPath=noise_path.value+'/'+noise_subpath.value+'/'
     dataFile=fullPath+'rms_noise.txt'
     print("dataFile:", dataFile)
     np.savetxt(dataFile, tube_RMS_mean , fmt='%.2f')
