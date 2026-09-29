@@ -350,7 +350,10 @@ def save_acquisition_files():
 
             if list_saving_checkbox.value:
                 dataFile=fullPath+'/'+'list_data'+'_'+str("%05d" % fileIndex)+'.txt'
-                np.savetxt(dataFile, np.array(LIST_DATA), fmt=['%.9f', '%i', '%i', '%i'])
+                if len(LIST_DATA) >= 1:
+                    np.savetxt(dataFile, np.array(LIST_DATA), fmt=['%.9f', '%i', '%i', '%i'])
+                else:
+                    np.savetxt(dataFile,[])
 
             ui.notification("Plots saved in .txt and .pdf formats",timeout=1)
 
