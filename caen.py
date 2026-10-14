@@ -43,7 +43,7 @@ class digitizer:
     def __init__(self):            
         match config.hardware:
             case "R5560":
-                self.ADC_sampling_freq=120E6 #MHz
+                self.ADC_sampling_freq=125E6 #MHz
                 self.ADC_input_range=2 #V
                 self.ADC_bit_depth=14
                 self.filter_output_bit_depth=16
