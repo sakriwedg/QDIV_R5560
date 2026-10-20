@@ -12,7 +12,7 @@ import numpy as np
 import detectors
 detectors.show()
     
-debug_mode=False
+debug_mode=True
 chatty=False
 path = './data/'
 filename = 'data'

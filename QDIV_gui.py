@@ -54,6 +54,9 @@ DATA_READER_ERROR=None
 LAST_BUFFER_READ_TIME=0
 LIST_SAVING_ENABLED=False # snapshot of list_saving_checkbox (the thread must not touch the GUI)
 
+ANALOG_MAX_LIST=[]
+ANALOG_MIN_LIST=[]
+
 # Virtual digitizer class for GUI debug mode
 class debug_mode_digitizer:
     def __init__(self):            
@@ -67,8 +70,17 @@ class debug_mode_digitizer:
     def set_registers(self,registers_table):
         pass
 
-    def reset_pulse_height_spectrum(self,tube_number):
+    def test(self):
         pass
+
+    def reset_pulse_height_spectrum(self,tube_number):
+        print('PHS reset')
+        global ANALOG_MAX_LIST,ANALOG_MIN_LIST
+        #ANALOG_MAX_LIST=np.empty((0,4))
+        ANALOG_MAX_LIST=[]
+        ANALOG_MIN_LIST=np.empty((0,4))
+        
+
 
     def read_pulse_height_spectrum(self,tube_number):
         bins = []
@@ -85,13 +97,37 @@ class debug_mode_digitizer:
         samples=self.custom_packet_buffer_size
         analog_traces = np.zeros([channels,samples])
         digital_traces = np.zeros([channels,samples])
+        pulse_center=samples//2
+        sample_axis=np.arange(samples)
+        baseline_0_1 = 2**(self.ADC_bit_depth-1)
+        max_height_0_1 = 2**self.ADC_bit_depth
+        max_height_2_3 = 2**self.filter_output_bit_depth
         for i in range(4):
-            analog_traces[i]=np.random.poisson(lam=0.1+i,size=samples)+i
-            digital_traces[i]=np.random.randint(2,size=samples)+i
+            pulse_height=np.random.uniform(0,100)
+            pulse_shape = pulse_height*np.exp(-0.5*((sample_axis-pulse_center)/10)**2)
+            if i < 2:
+                amplitude = np.random.uniform(0, max_height_0_1 - baseline_0_1)
+                analog_traces[i] = baseline_0_1 + amplitude * np.exp(-0.5*((sample_axis-pulse_center)/10)**2)
+            elif i >= 2:
+                amplitude = np.random.uniform(0, max_height_2_3)
+                analog_traces[i] = amplitude * np.exp(-0.5*((sample_axis-pulse_center)/10)**2)
+
+            pulse_train = np.zeros(samples, dtype=float)
+            pulse_probability = 0.03 + 0.015 * i
+            pulse_index = 0
+            while pulse_index < samples:
+                if np.random.rand() < pulse_probability:
+                    pulse_width = int(np.random.randint(2, 12))
+                    stop = min(pulse_index + pulse_width, samples)
+                    pulse_train[pulse_index:stop] = 1.0
+                    pulse_index = stop + int(np.random.randint(0, 12))
+                else:
+                    pulse_index += 1
+            digital_traces[i] = pulse_train + i
         analog_time_axis=1E6*np.arange(self.custom_packet_buffer_size)/(self.ADC_sampling_freq)
         res_osc=0
         return(res_osc,analog_time_axis,analog_traces,digital_traces)
-        
+            
     def configure_data_read_out(self):
         pass
     
@@ -486,7 +522,13 @@ def save_traces(combined_array):
         print('### Traces saved in: ' + dataFile)
 
 
-def update_scope_traces():
+def save_spectra():
+    fullPath = traces_path.value + '/' + traces_subpath.value
+    spectra_plot_vin.fig.savefig(fullPath+"/"+"Vin_spectra.pdf", format="pdf", bbox_inches="tight")
+    spectra_plot_vout.fig.savefig(fullPath+"/"+"Vout_spectra.pdf", format="pdf", bbox_inches="tight")
+
+
+async def update_scope_traces():
     global TRACES_TO_SAVE_COUNTER,TRACES_COUNTER,RMS_TABLE, OFFSET_TABLE
     check_data_folder(traces_path.value+'/'+traces_subpath.value )
     registers_table_update()
@@ -494,28 +536,83 @@ def update_scope_traces():
     scope_settings={'tube_number':tube_number.value,'threshold_slider':scope_threshold_slider.value,'trigger_mode':scope_trigger_mode.value,'trig_ch': scope_trig_ch_button.options.index(scope_trig_ch_button.value),'decimation_factor':decimation_factor.value}
     #buf_osc=digitizer.updateScopeSettings(sdk_list,scope_settings)
     [res_osc,analog_time_axis,analog_traces,digital_traces]=digitizer.read_scope_traces(scope_settings)
+    
+    
+    if res_osc == 0:
+        if not inv_spectra_switch_vin.value:
+            ANALOG_MAX_LIST.append([np.max(analog_traces,1)[0],np.max(analog_traces,1)[1],np.max(analog_traces,1)[2],np.max(analog_traces,1)[3]])
+        else:
+            #ANALOG_MAX_LIST.append([np.min(analog_traces,1)[0],np.min(analog_traces,1)[1],np.min(analog_traces,1)[2],np.min(analog_traces,1)[3]])
+            ANALOG_MAX_LIST.append([np.max(2**digitizer.ADC_bit_depth-analog_traces,1)[0],np.max(2**digitizer.ADC_bit_depth-analog_traces,1)[1],np.max(analog_traces,1)[2],np.max(analog_traces,1)[3]])
+            
+    # Evaluate hardware response
     if res_osc == 0:
         push_traces_line_plots(analog_time_axis,analog_traces,digital_traces)
     else:
+        # Non-blocking notification for missing triggers (due to threshold or clipping)
         ui.notify('No trigger (check scope threshold)')
         ui.update()
+        await asyncio.sleep(0.5)
         return
+
+
+    
     if traces_autosave_checkbox.value:
         TRACES_TO_SAVE_COUNTER=TRACES_TO_SAVE_COUNTER+1 
         if TRACES_TO_SAVE_COUNTER<number_of_traces_input.value+1:
             combined_array = np.column_stack((analog_traces[0], analog_traces[1],analog_traces[2], analog_traces[3]))
             save_traces(combined_array)
-            ui.notify("Saving traces", timeout=0.1)
+            ui.notify("Saving traces...", timeout=0.1)
         else:
             traces_autosave_checkbox.value=False
             scope_switch.value=False
             TRACES_TO_SAVE_COUNTER=0
+            if spectra_autosave_checkbox:
+                save_spectra()
         ui.update()
     TRACES_COUNTER=TRACES_COUNTER+1
+
+
     
-    if stats_or_spectra_toggle.value=='A+B pulse height spectrum':
-            (bins,phs)=digitizer.read_pulse_height_spectrum(tube_number.value)
-            spectra_plot.push(bins, [phs])
+
+    # Handle spectrum calculation
+    if stats_or_spectra_toggle.value == 'Pulse height spectra':
+        if ANALOG_MAX_LIST:
+            #print(np.array(ANALOG_MAX_LIST[:,0]))
+           #if inv_spectra_switch_vin:
+                #print(np.shape(ANALOG_MAX_LIST))
+                #print(np.array(ANALOG_MAX_LIST))
+                #phs0,bins = np.histogram(ANALOG_MAX_LIST[:,0],range=(0,2**digitizer.ADC_bit_depth),bins=500)
+                #phs1,bins = np.histogram(ANALOG_MAX_LIST[:,1],range=(0,2**digitizer.ADC_bit_depth),bins=500)
+            phs0,bins = np.histogram(np.array(ANALOG_MAX_LIST)[:,0],range=(phs_min_vin.value,phs_max_vin.value),bins=512)
+            phs1,bins = np.histogram(np.array(ANALOG_MAX_LIST)[:,1],range=(phs_min_vin.value,phs_max_vin.value),bins=512)
+            #else:
+            #    phs0,bins = np.histogram(np.array(ANALOG_MAX_LIST)[:,0],range=(phs_min_vin.value,phs_max_vin.value),bins=512)
+            #    phs1,bins = np.histogram(np.array(ANALOG_MAX_LIST)[:,1],range=(phs_min_vin.value,phs_max_vin.value),bins=512)
+            
+            
+            
+            spectra_plot_vin.push(bins[:-1], [phs0,phs1])
+            #spectra_plot_vin.fig.axes[0].set_xlim(0,100)
+
+            phs2,bins = np.histogram(np.array(ANALOG_MAX_LIST)[:,2],range=(phs_min_vout.value,phs_max_vout.value),bins=512)
+            phs3,bins = np.histogram(np.array(ANALOG_MAX_LIST)[:,3],range=(phs_min_vout.value,phs_max_vout.value),bins=512)
+            spectra_plot_vout.push(bins[:-1], [phs2,phs3])
+            #print(np.array(ANALOG_MAX_LIST)[:,3])
+            #spectra_plot_vout.fig.axes[0].set_xlim(0,100)
+            ui.update()
+
+def reset_spectra():
+    global ANALOG_MAX_LIST,ANALOG_MIN_LIST
+    #ANALOG_MAX_LIST=np.empty((0,4))
+    ANALOG_MAX_LIST=[]
+    ANALOG_MIN_LIST=[]
+    #ANALOG_MIN_LIST=np.empty((0,4))
+
+    
+    # if stats_or_spectra_toggle.value=='A+B pulse height spectrum':
+    #         (bins,phs)=digitizer.read_pulse_height_spectrum(tube_number.value)
+    #         spectra_plot.push(bins, [phs])
 
 ######################################################################
 # Electronic noise measurement
@@ -993,6 +1090,7 @@ with ui.tab_panels(tabs,value='a').classes('w-full'):
         with ui.row().classes('w-full no-wrap'):
             with ui.column().classes('w-1/8 items-center '):
 
+
                 html.b('Input stage')
                 polarity = ui.select(label='Polarity',options=["Positive","Negative"], value="Negative").classes('w-full')
                 #offset=ui.number(label='Offset [0-65535]', value=20000, format='%d').classes('w-full')
@@ -1011,8 +1109,37 @@ with ui.tab_panels(tabs,value='a').classes('w-full'):
 
 
             with ui.column().classes('w-1/8 items-center '):
+                # --- START NEW FUNCTION TO FLUSH HARDWARE BUFFERS ---
+                async def apply_filters_and_flush():
+                    # 1. Update and send registers to the digitizer
+                    registers_table_update()
+                    digitizer.set_registers(table)
+                    ui.notify('Applying filters and flushing hardware buffers...', type='info', timeout=1.0)
+                    
+                    try:
+                        # 2. Pause the plot timer to prevent rendering old data
+                        was_active = line_updates.active
+                        line_updates.active = False
+                        
+                        # 3. Rapidly read out the old overlapping traces from the FIFO
+                        flush_settings = {
+                            'tube_number': tube_number.value,
+                            'threshold_slider': scope_threshold_slider.value,
+                            'trigger_mode': scope_trigger_mode.value,
+                            'trig_ch': scope_trig_ch_button.options.index(scope_trig_ch_button.value),
+                            'decimation_factor': decimation_factor.value
+                        }
+                        for _ in range(6):  # Fast dummy reads to clear the hardware memory
+                            digitizer.read_scope_traces(flush_settings)
+                            await asyncio.sleep(0.05)
+                            
+                        # 4. Resume the plot timer with only new, clean data
+                        line_updates.active = was_active
+                    except Exception as e:
+                        pass
                 #html.b('Digital filter')
                 registers_table_update_button=ui.button(text='Apply filter settings',on_click=lambda:(registers_table_update(),digitizer.set_registers(table))).classes('w-full')
+                # --- END NEW FUNCTION ---
                 tau=ui.number(label='Shaping time (us)', value=1.0, format='%.1f').classes('w-full')
                 pz=ui.number(label='Pole Zero (us)', value=1.0, format='%.1f').classes('w-full')
                 Att1=ui.number(label='Filter 1 att. [0-7]', value=1, format='%d').classes('w-full')
@@ -1064,20 +1191,34 @@ with ui.tab_panels(tabs,value='a').classes('w-full'):
                             number_of_traces_input.visible=True
                     ui.update
                     return
+
+
+                
                 
                 traces_autosave_checkbox = ui.checkbox('Save traces',value=False,on_change=traces_autosave_click)
+                spectra_autosave_checkbox = ui.checkbox('Save spectra',value=False,on_change=traces_autosave_click)
+
                 number_of_traces_input = ui.number(label='Number of traces', value=10, format='%d').classes('w-full')
+                traces_filename = ui.input(label='Filename prefix', value='trace_').classes('w-full')
+
                 traces_subpath=ui.input(label='Subpath',value=config.det.name + '_' +str(config.det.SN).zfill(2)  +'/' + str(date.today())+'/traces/',
                 validation={'Input too long': lambda value: len(value) < 50})
                 traces_path=ui.input(label='Path',value=config.path,
                 validation={'Input too long': lambda value: len(value) < 50})
+                
                 number_of_traces_input.visible=False
+                traces_filename.visible=False
+
                 traces_path.visible=False
                 traces_subpath.visible=False
+
+
+
+
             
             #with ui.column().classes('w-3/8 justify-center no-wrap'): 
             with ui.column().classes(' no-wrap items-center justify-center'): 
-                stats_or_spectra_toggle = ui.toggle(['Filter input/output','Digital signals','Statistics', 'A+B pulse height spectrum'], value='Filter input/output').classes('justify-center no-wrap')
+                stats_or_spectra_toggle = ui.toggle(['Filter input/output','Digital signals','Statistics', 'Pulse height spectra'], value='Filter input/output').classes('justify-center no-wrap')
                 
                 with ui.row().classes('w-full no-wrap'):
 
@@ -1100,6 +1241,23 @@ with ui.tab_panels(tabs,value='a').classes('w-full'):
                                 html.b('Offset [mV]')
                                 mean_val_ch1=ui.number(label='Channel A input :', value=0.0, format='%.2f').classes('w-full')
                                 mean_val_ch2=ui.number(label='Channel B input :', value=0.0, format='%.2f').classes('w-full')
+
+                        inv_spectra_switch_vin=ui.switch('PHS of inverted filter input',on_change=lambda:reset_spectra()).bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v: 'Pulse height spectra' in v)
+                        
+                        spectra_plot_vin = ui.line_plot(n=2, limit=digitizer.custom_packet_buffer_size,update_every=config.GUI_refresh_period)\
+                            .with_legend(['Ch A','Ch B']).classes('w-full justify-center no-wrap').bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v: 'Pulse height spectra' in v)
+
+                        spectra_plot_vin.fig.suptitle("Filter input pulse height spectrum (Tube "+str(tube_number.value)+ ')')
+                        spectra_plot_vin.fig.supxlabel("ADU")
+                        spectra_plot_vin.fig.supylabel("Bins")
+
+                        with ui.row().classes('no-wrap items-center justify-center').bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v:  'Pulse height spectra' in v):
+                            #with ui.column().classes('w-1/2 no-wrap items-center justify-center'):
+                            phs_min_vin = ui.number(label='Vin min', value=10, format='%d').classes('w-1/2')
+                            phs_max_vin = ui.number(label='Vin max', value=2**digitizer.ADC_bit_depth, format='%d').classes('w-1/2')
+                        #phs_bin_vin=  ui.number(label='Vin bin', value=500, format='%d').classes('w-full')
+
+
 
                     with ui.column().classes('w-full no-wrap items-center justify-center'):
 
@@ -1130,12 +1288,27 @@ with ui.tab_panels(tabs,value='a').classes('w-full'):
                         digital_line_plot.fig.supxlabel("Micro-seconds")
                         digital_line_plot.fig.supylabel("0/1")
 
-                        reset_spectra_button=ui.button(text='Reset spectra',on_click=lambda:digitizer.reset_pulse_height_spectrum(tube_number.value)).bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v: 'A+B pulse height spectrum' in v)
-                        spectra_plot = ui.line_plot(n=1, limit=digitizer.custom_packet_buffer_size,update_every=config.GUI_refresh_period)\
-                            .with_legend(['Ch A + Ch B']).classes('w-full justify-center no-wrap').bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v: 'A+B pulse height spectrum' in v)
-                        spectra_plot.fig.suptitle(" Pulse height spectrum (Tube "+str(tube_number.value)+ ')')
-                        spectra_plot.fig.supxlabel("ADU")
-                        spectra_plot.fig.supylabel("Bins")
+
+                        reset_spectra_button=ui.button(text='Reset spectra',on_click=lambda:reset_spectra()).bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v: 'Pulse height spectra' in v)
+                        spectra_plot_vout = ui.line_plot(n=2, limit=digitizer.custom_packet_buffer_size,update_every=config.GUI_refresh_period)\
+                            .with_legend(['Ch A','Ch B']).classes('w-full justify-center no-wrap').bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v: 'Pulse height spectra' in v)
+
+                        #spectra_plot = ui.line_plot(n=1, limit=digitizer.custom_packet_buffer_size,update_every=config.GUI_refresh_period)\
+                        #    .with_legend(['Ch A + Ch B']).classes('w-full justify-center no-wrap').bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v: 'A+B pulse height spectrum' in v)
+                                                
+                        
+                        spectra_plot_vout.fig.suptitle("Filter output pulse height spectrum (Tube "+str(tube_number.value)+ ')')
+                        spectra_plot_vout.fig.supxlabel("ADU")
+                        spectra_plot_vout.fig.supylabel("Bins")
+                        spectra_plot_vout.fig.axes[0].set_xlim(0,100)
+
+
+                        with ui.row().classes('no-wrap items-center justify-center').bind_visibility_from(stats_or_spectra_toggle, 'value', lambda v:  'Pulse height spectra' in v):
+                            #with ui.column().classes('w-1/2 no-wrap items-center justify-center'): 
+                            phs_min_vout = ui.number(label='Vin min', value=1000, format='%d').classes('w-1/2')
+                            phs_max_vout = ui.number(label='Vin max', value=2**digitizer.filter_output_bit_depth, format='%d').classes('w-1/2')
+                        #phs_bin_vout=  ui.number(label='Vin bin', value=500, format='%d').classes('w-full')
+
 
                 
     # GUI menu "Electronic noise"
@@ -1174,6 +1347,8 @@ with ui.tab_panels(tabs,value='a').classes('w-full'):
                 # Detector type selection
                 def det_type_change():
                     config.det= next((det for det in detectors.list if det.name == det_type.value), None)
+                    reset_acquisition_variables() 
+                    tube_number.max = config.det.nb_of_tubes 
                     ui.notify(str(det_type.value) + " selected", timeout=0.2)
                     digitizer.test()
                     return     
@@ -1184,7 +1359,6 @@ with ui.tab_panels(tabs,value='a').classes('w-full'):
                     ui.notify("Serial Number modified to " + str(serial_number.value), timeout=0.2)
                     return  
                 serial_number = ui.number(label='Serial Number',value=config.det.SN,on_change=SN_change).classes('w-full  no-wrap justify-center')
-
 
                 html.b('Digitizer')
                 shared_values = {"shared_value": "Initial Value"}
